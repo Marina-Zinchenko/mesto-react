@@ -1,6 +1,6 @@
-  body{ background-color: #000000};
   @import url(./vendor/normalize.css);
   @import url(./vendor/fonts/fonts.css);
+  @import url(./vendor/styles.css);
   @import url(./blocks/page/page.css);
   @import url(./blocks/conteiner/conteiner.css);
   @import url(./blocks/header/header.css);
