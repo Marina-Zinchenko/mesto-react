@@ -52,17 +52,25 @@ class Api {
       body: JSON.stringify({ name, link }),
     }).then(this._checkErrors);
   }
-  /*Постановка лайка */
+  /*Постановка лайка *//*
   setLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._checkErrors);
-  }
-  /*Снятие лайка */
+  }*/
+  /*Снятие лайка *//*
   deleteLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkErrors);
+  }*/
+  /*проверка статуса лайка*/
+  changeLikeCardStatus(cardId, isLiked) {
+    const method = isLiked ? 'PUT' : 'DELETE';
+     return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: method,
       headers: this._headers,
     }).then(this._checkErrors);
   }

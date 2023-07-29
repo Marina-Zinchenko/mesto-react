@@ -1,9 +1,23 @@
+import { useContext } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import dell from "../images/dell.svg";
-function Card({ card, onCardClick }) {
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   function handleCardClick() {
     onCardClick(card);
   }
-  return (
+  function handleDeleteClick() {
+    onCardDelete(card);
+  }
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+  const currentUser = useContext(CurrentUserContext);
+  const isOwner = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const cardLikeButtonClassName = ( 
+    `element__like ${isLiked && 'element__like_active'}` 
+  );
+   return (
     <div className="template">
       <div className="element__item">
         <button className="element__link-img" type="button">
@@ -14,13 +28,13 @@ function Card({ card, onCardClick }) {
             onClick={handleCardClick}
           />
         </button>
-        <button className="element__dell">
+        {isOwner &&<button className="element__dell" onClick={handleDeleteClick}>
           <img className="element__img-dell" src={dell} alt="Удалить" />
-        </button>
+        </button>}
         <div className="element__mesto">
           <h2 className="element__text">{card.name}</h2>
           <div className="element__box-like">
-            <button className="element__like" type="button" />
+            {cardLikeButtonClassName && <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick}/>}
             <p className="element__counterlike">{card.likes.length}</p>
           </div>
         </div>
